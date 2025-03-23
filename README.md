@@ -7,7 +7,7 @@ A fun, interactive pixel art themed web application that displays a flower which
 - Interactive flower that blooms with a smooth CSS animation when clicked
 - Automatically generated pixel art animations that appear after the flower blooms:
   - Pixel version of you and your girlfriend dancing
-  - Twerking monkey animation created with pixel art
+  - Dancing monkey animation created with pixel art
 - Valentine's Day proposal message and interactive buttons
 - "No" button runs away when hovered
 - Fun heart animations when accepted
