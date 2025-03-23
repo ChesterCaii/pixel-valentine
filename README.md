@@ -1,4 +1,4 @@
-# Valentine Day Pixel Animation - Updated
+# Valentine Day Pixel Animation 
 
 This is a Valentine's Day web application with interactive animations featuring a blooming flower and pixel art.
 
