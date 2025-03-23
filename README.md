@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Valentine's Day Pixel Animation
 
 A fun, interactive pixel art themed web application that displays a flower which blooms when clicked to reveal a Valentine's Day message and cute pixel animations.
@@ -52,3 +53,6 @@ The application uses clever techniques to create a Valentine's experience:
 ## Browser Compatibility
 
 This application works best in modern browsers that support CSS animations, Canvas, and modern JavaScript (Chrome, Firefox, Safari, Edge). 
+=======
+# pixel-valentine
+>>>>>>> ad80613daf22b8c584da44acd31ae73f6d8b4b84
