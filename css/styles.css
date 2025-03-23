@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ffedeb 0%, #ffc2d1 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Photo styling */
+.photo-container {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.valentine-photo {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 1s ease, transform 1s ease;
+    /* Enable pixelated rendering */
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.valentine-photo.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Pixel border style */
+.valentine-photo.pixel-border {
+    border: 0;
+    position: relative;
+    box-shadow: 0 0 0 5px #ff6b81,
+                0 0 0 8px #fff,
+                0 8px 16px rgba(0, 0, 0, 0.1);
+    transform-origin: center;
+}
+
+.valentine-photo.pixel-border::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    background: #fff;
+}
+
+/* Flower styling */
+.flower-container {
+    margin: 0 auto 40px;
+    position: relative;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.flower {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    transform-origin: center bottom;
+}
+
+.center {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #ffcc00;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.petal {
+    position: absolute;
+    width: 50px;
+    height: 70px;
+    background-color: #ff6b81;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: 50%;
+    left: 50%;
+    transform-origin: center bottom;
+    transform: translate(-50%, -90%) scale(0.2);
+    opacity: 0.8;
+    transition: transform 1s ease, background-color 1s ease;
+    z-index: 1;
+}
+
+.petal-1 { transform: translate(-50%, -90%) rotate(0deg) scale(0.2); }
+.petal-2 { transform: translate(-50%, -90%) rotate(60deg) scale(0.2); }
+.petal-3 { transform: translate(-50%, -90%) rotate(120deg) scale(0.2); }
+.petal-4 { transform: translate(-50%, -90%) rotate(180deg) scale(0.2); }
+.petal-5 { transform: translate(-50%, -90%) rotate(240deg) scale(0.2); }
+.petal-6 { transform: translate(-50%, -90%) rotate(300deg) scale(0.2); }
+
+.stem {
+    position: absolute;
+    width: 8px;
+    height: 120px;
+    background-color: #4CAF50;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+.leaf {
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    background-color: #4CAF50;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    z-index: 0;
+}
+
+.leaf-1 {
+    transform: rotate(30deg);
+    left: 8px;
+    top: 40px;
+}
+
+.leaf-2 {
+    transform: rotate(-30deg);
+    left: -40px;
+    top: 80px;
+}
+
+/* Bloom animation classes */
+.flower.bloom .petal-1 { transform: translate(-50%, -90%) rotate(0deg) scale(1); background-color: #ff85a2; }
+.flower.bloom .petal-2 { transform: translate(-50%, -90%) rotate(60deg) scale(1); background-color: #ff749c; }
+.flower.bloom .petal-3 { transform: translate(-50%, -90%) rotate(120deg) scale(1); background-color: #ff6396; }
+.flower.bloom .petal-4 { transform: translate(-50%, -90%) rotate(180deg) scale(1); background-color: #ff538f; }
+.flower.bloom .petal-5 { transform: translate(-50%, -90%) rotate(240deg) scale(1); background-color: #ff4389; }
+.flower.bloom .petal-6 { transform: translate(-50%, -90%) rotate(300deg) scale(1); background-color: #ff3384; }
+
+/* Pixel Animations Styling */
+.pixel-animations {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    margin: 20px 0;
+    display: none; /* Hide initially */
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.dancing-couple {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-image: url('../assets/couple-sprite.png');
+    background-size: 1200px 150px; /* 8 frames x 150px width */
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.dancing-couple.animate {
+    animation: coupleAnimation 0.8s steps(8) infinite;
+}
+
+@keyframes coupleAnimation {
+    from { background-position: 0 0; }
+    to { background-position: -1200px 0; }
+}
+
+.twerking-monkey {
+    position: relative;
+    width: 100px;
+    height: 120px;
+    background-image: url('../assets/monkey-sprite.png');
+    background-size: 600px 120px; /* 6 frames x 100px width */
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.twerking-monkey.animate {
+    animation: monkeyAnimation 0.5s steps(6) infinite;
+}
+
+@keyframes monkeyAnimation {
+    from { background-position: 0 0; }
+    to { background-position: -600px 0; }
+}
+
+/* Message styling */
+.message-container {
+    opacity: 1; /* Make visible initially */
+    transform: translateY(0);
+    transition: opacity 1s ease, transform 1s ease;
+    position: relative;
+    margin-top: 20px;
+}
+
+.message {
+    color: #e91e63;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 12px 28px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#yes-btn {
+    background-color: #ff4081;
+    color: white;
+}
+
+#no-btn {
+    background-color: #9e9e9e;
+    color: white;
+}
+
+button:hover {
+    transform: translateY(-3px);
+}
+
+#yes-btn:hover {
+    background-color: #f50057;
+}
+
+#no-btn:hover {
+    background-color: #757575;
+}
+
+/* Photo frame animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.valentine-photo.accepted {
+    animation: pulse 1.5s infinite;
+    border-color: #ff4081;
+}
+
+/* Pixel photo accepted animation */
+.valentine-photo.pixel-border.accepted {
+    animation: pulse 1.5s infinite;
+    box-shadow: 0 0 0 5px #ff4081,
+                0 0 0 8px #fff,
+                0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Hearts animation */
+@keyframes floating {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+.heart {
+    position: fixed;
+    font-size: 1.5rem;
+    color: #ff4081;
+    z-index: -1;
+    animation: floating 4s linear infinite;
+} 
